@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace RealTimePPIngameOverlay
 {
+    [SyncPluginID("0d48f4c6-d7d8-47cc-8bd3-15dd23449765", "0.1.0")]
     [SyncPluginDependency("8eb9e8e0-7bca-4a96-93f7-6408e76898a9", Version = "^1.2.0", Require = true)]
     public class RealTimePPOverlayer : Plugin
     {
