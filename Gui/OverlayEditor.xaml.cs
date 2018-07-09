@@ -348,10 +348,10 @@ namespace RealTimePPIngameOverlay.Gui
             Setting.OverlayConfigs.WriteToMmf();
         }
 
-        private static readonly Regex _integer_regex = new Regex("[^0-9-]+"); //regex that matches disallowed text
-        private static readonly Regex _float_regex = new Regex("[^0-9.-]+"); //regex that matches disallowed text
+        private static readonly Regex _integer_regex = new Regex("[^0-9]+"); //regex that matches disallowed text
+        private static readonly Regex _float_regex = new Regex(@"^\d+(\.\d*)?$"); //regex that matches disallowed text
         private static bool IsIntegerTextAllowed(string text) => !_integer_regex.IsMatch(text);
-        private static bool IsFloatTextAllowed(string text) => !_float_regex.IsMatch(text);
+        private static bool IsFloatTextAllowed(string text) => _float_regex.IsMatch(text);
 
 
         private void TextBoxIntegerPasting(object sender, DataObjectPastingEventArgs e)
@@ -374,8 +374,9 @@ namespace RealTimePPIngameOverlay.Gui
         {
             if (e.DataObject.GetDataPresent(typeof(String)))
             {
-                String text = (String)e.DataObject.GetData(typeof(String));
-                if (!IsFloatTextAllowed(text))
+                System.Windows.Controls.TextBox t = sender as System.Windows.Controls.TextBox;
+                string nextText = t.Text + (String)e.DataObject.GetData(typeof(String));
+                if (!IsFloatTextAllowed(nextText))
                 {
                     e.CancelCommand();
                 }
@@ -393,7 +394,9 @@ namespace RealTimePPIngameOverlay.Gui
 
         private void FloatInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !IsFloatTextAllowed(e.Text);
+            System.Windows.Controls.TextBox t = sender as System.Windows.Controls.TextBox;
+            string nextText = t.Text + e.Text;
+            e.Handled = !IsFloatTextAllowed(nextText);
         }
     }
 }

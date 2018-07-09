@@ -19,7 +19,7 @@ namespace RealTimePPIngameOverlay
     {
 
 
-        public RealTimePPOverlayer() : base("RealTimePPIngameOverlay", "Deliay")
+        public RealTimePPOverlayer() : base("RealTimePPIngameOverlay", "Deliay & KedamaOvO")
         {
         }
 
