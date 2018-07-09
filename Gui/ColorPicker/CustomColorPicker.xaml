@@ -1,0 +1,177 @@
+﻿<UserControl x:Class="DropDownCustomColorPicker.CustomColorPicker"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:mun="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Royale" 
+    xmlns:d ="clr-namespace:DropDownCustomColorPicker"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+     >
+    <UserControl.Resources>
+        <Style TargetType="{x:Type ContextMenu}" x:Key="ColorPickerContextMenu">
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type MenuItem}"  >
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate  TargetType="MenuItem">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>                                         
+                                            <ColumnDefinition Width="*" />                                       
+                                        </Grid.ColumnDefinitions>
+                                        <ContentPresenter  
+        Name="HeaderHost"
+        Grid.Column="0"
+        ContentSource="Header"
+        RecognizesAccessKey="False"/>
+
+                                    </Grid>
+
+                                </ControlTemplate>
+
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button" x:Key="ColorPickerButton">
+            <Style.Resources>
+                <ResourceDictionary />
+            </Style.Resources>
+            <Style.BasedOn>
+                <Style TargetType="ButtonBase">
+                    <Style.Resources>
+                        <ResourceDictionary />
+                    </Style.Resources>
+                    <Setter Property="FrameworkElement.FocusVisualStyle">
+                        <Setter.Value>
+                            <Style TargetType="IFrameworkInputElement">
+                                <Style.Resources>
+                                    <ResourceDictionary />
+                                </Style.Resources>
+                                <Setter Property="Control.Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Rectangle Margin="3,3,3,3" SnapsToDevicePixels="True" Stroke="red	" StrokeDashArray="1 2" StrokeThickness="1" />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Panel.Background">
+                        <Setter.Value>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.GradientStops>
+                                    <GradientStop Offset="0" Color="#FFFFFFFF" />
+                                    <GradientStop Offset="0.5" Color="#FFE3EBF3" />
+                                    <GradientStop Offset="0.5" Color="#FFD0DCEB" />
+                                    <GradientStop Offset="1" Color="#FFA6B8CF" />
+                                </LinearGradientBrush.GradientStops>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Border.BorderBrush">
+                        <Setter.Value>
+                            <SolidColorBrush>#FF2B4F82</SolidColorBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="TextElement.Foreground">
+                        <Setter.Value>
+                            <DynamicResource ResourceKey="{x:Static SystemColors.ControlTextBrushKey}" />
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Control.HorizontalContentAlignment">
+                        <Setter.Value>
+                            <x:Static Member="HorizontalAlignment.Center" />
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Control.VerticalContentAlignment">
+                        <Setter.Value>
+                            <x:Static Member="VerticalAlignment.Center" />
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Control.Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ButtonBase">
+                                <mun:ButtonChrome BorderBrush="{TemplateBinding Border.BorderBrush}" RenderMouseOver="{TemplateBinding UIElement.IsMouseOver}" RenderPressed="{TemplateBinding ButtonBase.IsPressed}" Fill="{TemplateBinding Panel.Background}" Name="Chrome" SnapsToDevicePixels="True" RenderDefaulted="{TemplateBinding Button.IsDefaulted}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition MaxWidth="5"/>
+                                            <ColumnDefinition MaxWidth="10" />
+                                        </Grid.ColumnDefinitions>
+
+
+
+                                        <Path  Grid.Row="0" Grid.Column="2"   Name="DropDownButton"
+							Data="M0,0L3,3 6,0z" 
+							Margin="0,1,0,0" 
+							 
+							Stroke="{TemplateBinding Foreground}" 
+							Fill="{TemplateBinding Foreground}" 
+							HorizontalAlignment="Center" 
+							VerticalAlignment="Center"
+							/>
+
+
+                                        <ContentPresenter Margin="{TemplateBinding Control.Padding}" HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" RecognizesAccessKey="True" Content="{TemplateBinding ContentControl.Content}" />
+
+                                    </Grid>
+                                </mun:ButtonChrome>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="UIElement.IsKeyboardFocused">
+                                        <Setter Property="mun:ButtonChrome.RenderDefaulted" TargetName="Chrome">
+                                            <Setter.Value>
+                                                <s:Boolean>True</s:Boolean>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Trigger.Value>
+                                            <s:Boolean>True</s:Boolean>
+                                        </Trigger.Value>
+                                    </Trigger>
+                                    <Trigger Property="ToggleButton.IsChecked">
+                                        <Setter Property="mun:ButtonChrome.RenderPressed" TargetName="Chrome">
+                                            <Setter.Value>
+                                                <s:Boolean>True</s:Boolean>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Trigger.Value>
+                                            <s:Boolean>True</s:Boolean>
+                                        </Trigger.Value>
+                                    </Trigger>
+                                    <Trigger Property="UIElement.IsEnabled">
+                                        <Setter Property="TextElement.Foreground">
+                                            <Setter.Value>
+                                                <DynamicResource ResourceKey="{x:Static SystemColors.GrayTextBrushKey}" />
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Trigger.Value>
+                                            <s:Boolean>False</s:Boolean>
+                                        </Trigger.Value>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Style.BasedOn>
+        </Style>
+    </UserControl.Resources>
+
+    <StackPanel Orientation="Vertical">
+        <Button Name="b" Style="{StaticResource ColorPickerButton}"   >
+            <Button.ContextMenu>
+                <ContextMenu  Style="{StaticResource ColorPickerContextMenu}"   >
+                    <Border Background="GhostWhite" >
+                        <d:ColorPicker x:Name="cp"></d:ColorPicker>
+                    </Border>
+                </ContextMenu>
+            </Button.ContextMenu>
+            <Rectangle Width="10" Height="10" Stroke="Black" Name="recContent" HorizontalAlignment="Center" 
+                      Margin="0 1 0 1"/>
+        </Button>         
+    </StackPanel>
+</UserControl>

@@ -21,7 +21,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using RealTimePPIngameOverlay.Annotations;
-using RealTimePPIngameOverlay.Gui.ColorPicker;
 using Color = System.Windows.Media.Color;
 using MessageBox = System.Windows.MessageBox;
 
@@ -252,10 +251,27 @@ namespace RealTimePPIngameOverlay.Gui
 
                 public void Execute(object parameter)
                 {
-                    ConfigItemProxy item = parameter as ConfigItemProxy;
+                    /*ConfigItemProxy item = parameter as ConfigItemProxy;
 
-                    AlphaColorDialog colorWindow = new AlphaColorDialog();
-                    switch (_type)
+                    ColorPicker colorWindow = new ColorPicker();
+                    colorWindow.SelectedColorChanged += (s, e) =>
+                    {
+                        var c = colorWindow.SelectedColor.Value;
+                        switch (_type)
+                        {
+                            case ColorType.Text:
+                                item.TextColor = Color.FromArgb(c.A, c.R, c.G, c.B);
+                                break;
+                            case ColorType.Background:
+                                item.BackgroundColor = Color.FromArgb(c.A, c.R, c.G, c.B);
+                                break;
+                            case ColorType.Border:
+                                item.BorderColor = Color.FromArgb(c.A, c.R, c.G, c.B);
+                                break;
+                        }
+                    };
+                    colorWindow.ShowDialog();*/
+                    /*switch (_type)
                     {
                         case ColorType.Text:
                             colorWindow.Color = System.Drawing.Color.FromArgb(item.TextColor.A, item.TextColor.R, item.TextColor.G, item.TextColor.B);
@@ -269,23 +285,7 @@ namespace RealTimePPIngameOverlay.Gui
 
                             break;
                     }
-                    
-                    if (colorWindow.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    {
-                        var c = colorWindow.Color;
-                        switch (_type)
-                        {
-                            case ColorType.Text:
-                                item.TextColor = Color.FromArgb(c.A,c.R,c.G,c.B);
-                                break;
-                            case ColorType.Background:
-                                item.BackgroundColor = Color.FromArgb(c.A, c.R, c.G, c.B);
-                                break;
-                            case ColorType.Border:
-                                item.BorderColor = Color.FromArgb(c.A, c.R, c.G, c.B);
-                                break;
-                        }
-                    }
+                    */
                 }
 
                 public event EventHandler CanExecuteChanged

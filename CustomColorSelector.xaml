@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="DropDownCustomColorPicker.ColorPicker"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d ="clr-namespace:DropDownCustomColorPicker" Width="200">
+ <UserControl.Resources>
+        <d:ColorToSolidColorBrushConverter x:Key="FromColorToSolidColorBrushConverter"/>
+ </UserControl.Resources>
+    <StackPanel>
+        <Expander Header="Default Colors" Name="epDefaultcolor" PreviewMouseLeftButtonDown="epDefaultcolor_PreviewMouseLeftButtonDown"  IsExpanded="True">
+            <ListBox    x:Name="DefaultPicker"        
+              SnapsToDevicePixels="True">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Rectangle Width="15" Height="15" Stroke="Black" HorizontalAlignment="Center"
+                    Fill="{Binding Converter={StaticResource FromColorToSolidColorBrushConverter}}" Margin="0 1 0 1"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel  Width="151" Margin="0 10 0 10"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </Expander>
+        <Expander Header="More Colors"  Name="epCustomcolor" Expanded="epCustomcolor_Expanded"     IsExpanded="False">
+            <StackPanel    Orientation="Vertical">
+                <Grid  Margin="10,10,0,0" >
+                    <Border BorderBrush="Black" BorderThickness="2" 
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                        Background="Black"
+                        Width="145" Height="145">
+                    </Border>
+                    <Image x:Name="image"  Width="140" Height="140" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top" Margin="2"
+                        />
+                    <Canvas x:Name="CanColor"  Width="140" Height="140" 
+                       HorizontalAlignment="Center"
+                       Background="Transparent"
+                       VerticalAlignment="Top" Margin="2"  >
+
+                        <Ellipse x:Name="EpPointer" Width="8" 
+                       Height="8" Stroke="Black" Fill="White" 
+                       />
+
+                    </Canvas>
+                </Grid>
+
+                <StackPanel Margin="0,10,0,0" Orientation="Horizontal"  >
+                    <Label Content="ARGB" Margin="1,0,0,0"  HorizontalAlignment="Left"
+  FontWeight="Bold" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtAlpha" TabIndex="0"  MaxLength="3" Width="35" Height="30" BorderThickness="1" Background="White" Foreground="Black" 
+   Margin="2,1,2,1"  />
+                    <TextBox x:Name="txtR" TabIndex="1" MaxLength="3"  Width="35" BorderThickness="1" Background="White" Foreground="Black" 
+  Margin="2,1,2,1"  />
+                    <TextBox x:Name="txtG" TabIndex="2" MaxLength="3" Width="35" BorderThickness="1" Background="White" Foreground="Black" 
+   Margin="2,1,2,1"  />
+                    <TextBox x:Name="txtB" TabIndex="3" MaxLength="3" Width="35" BorderThickness="1" Background="White" Foreground="Black" 
+  Margin="2,1,2,1"  />
+
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"  Margin="5,5,0,0">
+                    <Label    Content="Hex" Margin="5,0,0,0" HorizontalAlignment="Left"
+  FontWeight="Bold"
+VerticalAlignment="Center"/>
+                    <Border CornerRadius="5" Margin="22,0,0,0" Background="White"
+BorderBrush="Black" BorderThickness="2" Width="80" Height="30">
+                        <TextBox x:Name="txtAll" TabIndex="4" BorderThickness="1" Background="White" Foreground="Black"
+BorderBrush="Transparent"   />
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Margin="5,10,0,0"  Orientation="Horizontal" >
+                    <Label Content="Preview" Margin="5,0,0,0" HorizontalAlignment="Left" 
+                        FontWeight="Bold" VerticalAlignment="Center"/>
+
+                    <Border  CornerRadius="5" Width="80"   Height="30"
+                          BorderBrush="Black" BorderThickness="2"
+                         >
+                        <Label Name="lblPreview"    Height="30"  
+                       Foreground="Black"   FontWeight="Bold" VerticalAlignment="Center"/>
+                    </Border>
+                </StackPanel>
+                <Slider x:Name="SdA" Orientation="Horizontal"  Width="150"
+                Minimum="0" Maximum="255" 
+                SmallChange="1" LargeChange="25"
+                VerticalAlignment="Center" Margin="5" 
+                Value="255"
+                ValueChanged="SdA_ValueChanged"/>
+            </StackPanel>
+        </Expander>
+    </StackPanel>
+</UserControl>
