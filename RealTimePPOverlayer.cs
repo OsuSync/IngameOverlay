@@ -14,11 +14,11 @@ using RealTimePPIngameOverlay.Gui;
 
 namespace RealTimePPIngameOverlay
 {
-    [SyncPluginID("0d48f4c6-d7d8-47cc-8bd3-15dd23449765", "0.2.0")]
+    [SyncPluginID("0d48f4c6-d7d8-47cc-8bd3-15dd23449765", PLUGIN_VERSION)]
     [SyncPluginDependency("7216787b-507b-4eef-96fb-e993722acf2e", Version = "^1.4.0", Require = true)]
     public class RealTimePPOverlayer : Plugin
     {
-
+        public const string PLUGIN_VERSION = "0.2.0";
 
         public RealTimePPOverlayer() : base("RealTimePPIngameOverlay", "Deliay & KedamaOvO")
         {
