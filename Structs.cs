@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using RealTimePPIngameOverlay.JsonConverter;
 
 namespace RealTimePPIngameOverlay
 {
@@ -41,8 +42,14 @@ namespace RealTimePPIngameOverlay
         public string Mmf { get; set; } = "rtpp-pp"; //128b
         public string FontPath { get; set; } = ""; //512b
         public int[] Position { get; set; } = new[] {0, 0}; //x,y 2i
+
+        [JsonConverter(typeof(RgbaStringJsonConverter))]
         public float[] TextRgba { get; set; } = new[] {1f, 1f, 1f, 1f}; //4f
+
+        [JsonConverter(typeof(RgbaStringJsonConverter))]
         public float[] BackgroundRgba { get; set; } = new[] { 0.06f,0.06f,0.06f,0.70f}; //4f
+
+        [JsonConverter(typeof(RgbaStringJsonConverter))]
         public float[] BorderRgba { get; set; } = new[] {0.43f,0.43f,0.5f,0.5f }; //4f
         public float[] Pivot { get; set; } = new[] {0f,0f}; //2f
         public float FontSize { get; set; } = 10.0f;
