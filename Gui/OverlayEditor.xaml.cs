@@ -20,7 +20,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
-using RealTimePPIngameOverlay.Annotations;
 using Color = System.Windows.Media.Color;
 using MessageBox = System.Windows.MessageBox;
 
@@ -178,7 +177,6 @@ namespace RealTimePPIngameOverlay.Gui
                 nameof(FontSize),
             };
 
-            [NotifyPropertyChangedInvocator]
             protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

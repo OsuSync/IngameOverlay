@@ -65,7 +65,6 @@
     </Compile>
     <Compile Include="Gui\OverlayGuiAttribute.cs" />
     <Compile Include="Gui\RegisterGuiHelper.cs" />
-    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="NativeMethod.cs" />
     <Compile Include="OverlayCommands.cs" />
