@@ -37,7 +37,6 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="PresentationFramework.Royale" />
     <Reference Include="Sync">
       <HintPath>D:\osu!\Sync\Sync.exe</HintPath>
     </Reference>
@@ -53,18 +52,15 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\osuSync\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Language.cs" />
     <Compile Include="Gui\OverlayConfigurationItemCreator.cs" />
     <Compile Include="Gui\OverlayEditor.xaml.cs">
       <DependentUpon>OverlayEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Gui\ColorPicker\CustomColorPicker.xaml.cs">
-      <DependentUpon>CustomColorPicker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Gui\ColorPicker\CustomColorSelector.xaml.cs">
-      <DependentUpon>CustomColorSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gui\OverlayGuiAttribute.cs" />
     <Compile Include="Gui\RegisterGuiHelper.cs" />
@@ -88,20 +84,16 @@
       <Project>{0f922afa-bbc0-44a0-8ca7-d408d5dd8298}</Project>
       <Name>ConfigGUI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MemoryReader\OsuRTDataProvider.csproj">
+      <Project>{d518dc59-cc9a-4886-839f-7691d5efae56}</Project>
+      <Name>OsuRTDataProvider</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Gui\OverlayEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Gui\ColorPicker\CustomColorSelector.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Gui\ColorPicker\CustomColorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

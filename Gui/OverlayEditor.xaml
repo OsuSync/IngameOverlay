@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RealTimePPIngameOverlay.Gui"
              xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
-             xmlns:cp="clr-namespace:DropDownCustomColorPicker"     
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              Width="850" Height="600"
              Closing="OverlayEditor_OnClosing"
@@ -43,17 +43,17 @@
                                 <!-- 0 -->
                                 <StackPanel Orientation="Horizontal">
                                     <Label Width="90" HorizontalAlignment="Right" Content="Text:"/>
-                                    <cp:CustomColorPicker Width="40" SelectedColor="{Binding TextColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                    <xctk:ColorPicker Width="40" SelectedColor="{Binding TextColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal">
                                     <Label Width="90" HorizontalAlignment="Right" Content="Background:"/>
-                                    <cp:CustomColorPicker Width="40" SelectedColor="{Binding BackgroundColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                    <xctk:ColorPicker Width="40" SelectedColor="{Binding BackgroundColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal">
                                     <Label Width="90" HorizontalAlignment="Right" Content="Border:"/>
-                                    <cp:CustomColorPicker Width="40" SelectedColor="{Binding BorderColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                    <xctk:ColorPicker Width="40" SelectedColor="{Binding BorderColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                                 </StackPanel>
                             </StackPanel>
                         </GroupBox>
@@ -62,12 +62,12 @@
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Label Width="20" HorizontalAlignment="Right" Content="X:"/>
-                                    <Slider Name="PosXSlider"  Width="100" Minimum="0" Maximum="{Binding PositionXSliderMaxValue}" Value="{Binding PositionX}" Margin="4,0,0,0"/>
+                                    <Slider Name="PosXSlider"  Width="240" Minimum="0" Maximum="{Binding PositionXSliderMaxValue}" Value="{Binding PositionX}" Margin="4,0,0,0"/>
                                     <TextBox Margin="0,0,2,0" Width="45" MaxLines="1" AcceptsReturn="False" Text="{Binding ElementName=PosXSlider,Path=Value}" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerIntput" DataObject.Pasting="TextBoxIntegerPasting"/>
                                 </StackPanel>
                                 <StackPanel  Orientation="Horizontal">
                                     <Label Width="20" HorizontalAlignment="Right" Content="Y:"/>
-                                    <Slider Name="PosYSlider" Width="100" Minimum="0" Maximum="{Binding PositionYSliderMaxValue}" Value="{Binding PositionY}" Margin="4,0,0,0"/>
+                                    <Slider Name="PosYSlider" Width="240" Minimum="0" Maximum="{Binding PositionYSliderMaxValue}" Value="{Binding PositionY}" Margin="4,0,0,0"/>
                                     <TextBox Margin="0,0,2,0" Width="45" MaxLines="1" AcceptsReturn="False" Text="{Binding ElementName=PosYSlider,Path=Value}" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerIntput" DataObject.Pasting="TextBoxIntegerPasting"/>
                                 </StackPanel>
                             </StackPanel>
@@ -87,6 +87,10 @@
                                 </StackPanel>
                             </StackPanel>
                         </GroupBox>
+
+                         <GroupBox Header="When is it visible?" Width="120">
+                             <xctk:CheckListBox Margin="2" ItemsSource="{x:Static local:OverlayEditor.AvailableStatus}" SelectedItemsOverride="{Binding VisibleStatus}"/>
+                         </GroupBox>
                     </StackPanel>
                 </Grid>
             </Border>

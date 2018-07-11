@@ -29,8 +29,9 @@ namespace RealTimePPIngameOverlay.Gui
     /// <summary>
     /// OverlayEditor.xaml 的交互逻辑
     /// </summary>
-    public partial class OverlayEditor : Window
+    partial class OverlayEditor : Window
     {
+        public static List<string> AvailableStatus { get; } = new List<string>() { "Playing", "Listening", "Editing", "Rank", "Idle" };
         class ConfigItemProxy : INotifyPropertyChanged
         {
             private OverlayConfigItem _object;
@@ -133,6 +134,16 @@ namespace RealTimePPIngameOverlay.Gui
                 {
                     _object.Position[1] = value;
                     OnPropertyChanged(nameof(PositionY));
+            }
+            }
+
+            public List<string> VisibleStatus
+            {
+                get => _object.VisibleStatus;
+                set
+                {
+                    _object.VisibleStatus = value; 
+                    OnPropertyChanged(nameof(VisibleStatus));
                 }
             }
 
@@ -182,9 +193,6 @@ namespace RealTimePPIngameOverlay.Gui
             }
 
             public SelectFontCommand SelectFont { get; set; } = new SelectFontCommand();
-            public SelectColorCommand SelectTextColor { get; set; } = new SelectColorCommand(ColorType.Text);
-            public SelectColorCommand SelectBackgroundColor { get; set; } = new SelectColorCommand(ColorType.Background);
-            public SelectColorCommand SelectBorderColor { get; set; } = new SelectColorCommand(ColorType.Border);
             public DeleteCommand DeleteItem { get; set; }
 
             public class SelectFontCommand : ICommand
@@ -238,63 +246,6 @@ namespace RealTimePPIngameOverlay.Gui
                     remove { }
                 }
             }
-
-            public class SelectColorCommand : ICommand
-            {
-                private ColorType _type;
-                public SelectColorCommand(ColorType type)
-                {
-                    _type = type;
-                }
-
-                public bool CanExecute(object parameter) => true;
-
-                public void Execute(object parameter)
-                {
-                    /*ConfigItemProxy item = parameter as ConfigItemProxy;
-
-                    ColorPicker colorWindow = new ColorPicker();
-                    colorWindow.SelectedColorChanged += (s, e) =>
-                    {
-                        var c = colorWindow.SelectedColor.Value;
-                        switch (_type)
-                        {
-                            case ColorType.Text:
-                                item.TextColor = Color.FromArgb(c.A, c.R, c.G, c.B);
-                                break;
-                            case ColorType.Background:
-                                item.BackgroundColor = Color.FromArgb(c.A, c.R, c.G, c.B);
-                                break;
-                            case ColorType.Border:
-                                item.BorderColor = Color.FromArgb(c.A, c.R, c.G, c.B);
-                                break;
-                        }
-                    };
-                    colorWindow.ShowDialog();*/
-                    /*switch (_type)
-                    {
-                        case ColorType.Text:
-                            colorWindow.Color = System.Drawing.Color.FromArgb(item.TextColor.A, item.TextColor.R, item.TextColor.G, item.TextColor.B);
-                            break;
-                        case ColorType.Background:
-                            colorWindow.Color = System.Drawing.Color.FromArgb(item.BackgroundColor.A, item.BackgroundColor.R, item.BackgroundColor.G, item.BackgroundColor.B);
-
-                            break;
-                        case ColorType.Border:
-                            colorWindow.Color = System.Drawing.Color.FromArgb(item.BorderColor.A, item.BorderColor.R, item.BorderColor.G, item.BorderColor.B);
-
-                            break;
-                    }
-                    */
-                }
-
-                public event EventHandler CanExecuteChanged
-                {
-                    add { }
-                    remove { }
-                }
-            }
-
             public class DeleteCommand : ICommand
             {
                 private OverlayEditor m_window;

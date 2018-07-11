@@ -9,12 +9,13 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using OsuRTDataProvider;
 using RealTimePPIngameOverlay.Gui;
 
 namespace RealTimePPIngameOverlay
 {
-    [SyncPluginID("0d48f4c6-d7d8-47cc-8bd3-15dd23449765", "0.1.1")]
-    //[SyncPluginDependency("8eb9e8e0-7bca-4a96-93f7-6408e76898a9", Version = "^1.4.0", Require = true)]
+    [SyncPluginID("0d48f4c6-d7d8-47cc-8bd3-15dd23449765", "0.2.0")]
+    [SyncPluginDependency("7216787b-507b-4eef-96fb-e993722acf2e", Version = "^1.4.0", Require = true)]
     public class RealTimePPOverlayer : Plugin
     {
 
@@ -39,6 +40,17 @@ namespace RealTimePPIngameOverlay
             EventBus.BindEvent<PluginEvents.ProgramReadyEvent>(_ =>{
                 var plugin = getHoster().EnumPluings().First(p => p.Name == "ConfigGUI");
                 RegisterGuiHelper.RegisterGui(plugin);
+
+                var ortdp = getHoster().EnumPluings().First(p => p.Name == "OsuRTDataProvider") as OsuRTDataProviderPlugin;
+                ortdp.ListenerManager.OnStatusChanged += (l, c) =>
+                {
+                    string currentStatusString = c.ToString();
+                    foreach (var item in Setting.OverlayConfigs.OverlayConfigItems)
+                    {
+                        item.Visibility = item.VisibleStatus.Contains(currentStatusString);
+                    }
+                    Setting.OverlayConfigs.WriteToMmf(false);
+                };
             });
         }
     }

@@ -47,6 +47,8 @@ namespace RealTimePPIngameOverlay
         public float[] Pivot { get; set; } = new[] {0f,0f}; //2f
         public float FontSize { get; set; } = 10.0f;
 
+        public List<string> VisibleStatus { get; set; } = new List<string>() {"Playing"};
+
         [JsonIgnore]
         public bool Visibility { get; set; } = true;
 
