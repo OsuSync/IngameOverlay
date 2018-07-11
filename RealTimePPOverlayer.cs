@@ -38,10 +38,11 @@ namespace RealTimePPIngameOverlay
             });
             
             EventBus.BindEvent<PluginEvents.ProgramReadyEvent>(_ =>{
-                var plugin = getHoster().EnumPluings().First(p => p.Name == "ConfigGUI");
-                RegisterGuiHelper.RegisterGui(plugin);
+                var guiPlugin = getHoster().EnumPluings().FirstOrDefault(p => p.Name == "ConfigGUI");
+                if(guiPlugin!=null)
+                    RegisterGuiHelper.RegisterGui(guiPlugin);
 
-                var ortdp = getHoster().EnumPluings().First(p => p.Name == "OsuRTDataProvider") as OsuRTDataProviderPlugin;
+                var ortdp = getHoster().EnumPluings().FirstOrDefault(p => p.Name == "OsuRTDataProvider") as OsuRTDataProviderPlugin;
                 ortdp.ListenerManager.OnStatusChanged += (l, c) =>
                 {
                     string currentStatusString = c.ToString();
