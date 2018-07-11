@@ -30,6 +30,20 @@ namespace RealTimePPIngameOverlay
             set => Setting.OverlayConfigs = JsonConvert.DeserializeObject<OverlayConfigs>(value);
         }
 
+        [Path(IsDirectory = false)]
+        public ConfigurationElement OsuExecPath
+        {
+            get => Setting.OsuExecPath;
+            set => Setting.OsuExecPath = value;
+        }
+
+        [Bool(Hide = true)]
+        public ConfigurationElement AcceptEula
+        {
+            get => Setting.AcceptEula.ToString();
+            set => Setting.AcceptEula = bool.Parse(value);
+        }
+
         #region unused
         public void onConfigurationLoad()
         {
@@ -47,7 +61,9 @@ namespace RealTimePPIngameOverlay
 
     public static class Setting
     {
+        public static string OsuExecPath = "";
         public static OverlayConfigs OverlayConfigs=new OverlayConfigs();
         public static GlobalConfig GlobalConfig = new GlobalConfig();
+        public static bool AcceptEula = false;
     }
 }

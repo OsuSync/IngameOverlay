@@ -2,7 +2,10 @@
 using Sync.Tools;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,22 +28,43 @@ namespace RealTimePPIngameOverlay
         private void OverlayHelp(string value)
         {
             IO.CurrentIO.WriteHelp("i", "accept EUAL and start Injector");
+            IO.CurrentIO.WriteHelp("osu", "start osu! with overlay");
         }
+
+        private static bool s_cmdIisRun = false;
 
         public static void i(string value)
         {
             Task.Run(() => OverlayLoader.RunLoader());
             Setting.GlobalConfig.WriteToMmf();
             Setting.OverlayConfigs.WriteToMmf();
+            Setting.AcceptEula = true;
+            s_cmdIisRun = true;
         }
 
-        public static void t(string value)
+        public static void osu(string value)
         {
-            if (Setting.OverlayConfigs.OverlayConfigItems.Count == 0)
+            if (!string.IsNullOrWhiteSpace(Setting.OsuExecPath) && File.Exists(Setting.OsuExecPath) &&
+                Setting.OsuExecPath.ToLower().EndsWith("osu!.exe"))
             {
-                Setting.OverlayConfigs.OverlayConfigItems.Add(new OverlayConfigItem());
+                if (Setting.AcceptEula)
+                {
+                    if (!s_cmdIisRun)
+                    OverlayLoader.RunLoader();
+                    Setting.GlobalConfig.WriteToMmf();
+                    Setting.OverlayConfigs.WriteToMmf();
+                    Process.Start(Setting.OsuExecPath);
+                    s_cmdIisRun = false;
+                }
+                else
+                {
+                    Sync.Tools.IO.DefaultIO.WriteColor("You have not accepted EULA.",ConsoleColor.Yellow);
+                }
             }
-            Setting.OverlayConfigs.WriteToMmf();
+            else
+            {
+                Sync.Tools.IO.DefaultIO.WriteColor("Path error, please check the path!", ConsoleColor.Yellow);
+            }
         }
 
         private bool Overlay(Arguments arg)
@@ -51,8 +75,8 @@ namespace RealTimePPIngameOverlay
                 case "i":
                     action = i;
                     break;
-                case "t":
-                    action = t;
+                case "osu":
+                    action = osu;
                     break;
             }
             if (arg.Count == 2) action(arg[1]);
