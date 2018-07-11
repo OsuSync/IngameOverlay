@@ -431,9 +431,9 @@ namespace DropDownCustomColorPicker
         {
             int x = (int)Mouse.GetPosition(CanColor).X;
             int y = (int)Mouse.GetPosition(CanColor).Y;
-            if(x<CanColor.Width)
+            if(x<CanColor.Width && x>=0)
                 EpPointer.SetValue(Canvas.LeftProperty, (double)(x - EpPointer.Width / 2));
-            if(y<CanColor.Height)
+            if(y<CanColor.Height && y>=0)
                 EpPointer.SetValue(Canvas.TopProperty, (double)(y - EpPointer.Height / 2));
             CanColor.InvalidateVisual();
         }

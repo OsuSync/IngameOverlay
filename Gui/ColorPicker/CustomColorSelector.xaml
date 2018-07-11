@@ -13,18 +13,15 @@
                         Background="Black"
                         Width="145" Height="145">
                 </Border>
-                <Image x:Name="image"  Width="140" Height="140" 
+                <Image x:Name="image"  Width="150" Height="150" 
                        HorizontalAlignment="Center"
-                       VerticalAlignment="Top" Margin="2"
-                        />
-                <Canvas x:Name="CanColor"  Width="140" Height="140" 
+                       VerticalAlignment="Top"/>
+                <Canvas x:Name="CanColor"  Width="150" Height="150" 
                        HorizontalAlignment="Center"
                        Background="Transparent"
-                       VerticalAlignment="Top" Margin="2">
+                       VerticalAlignment="Top">
 
-                    <Ellipse x:Name="EpPointer" Width="6" 
-                       Height="6" Stroke="Black" Fill="White" 
-                       />
+                    <Ellipse x:Name="EpPointer" Width="6" Height="6" Stroke="Black" Fill="White" />
 
                 </Canvas>
             </Grid>
