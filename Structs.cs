@@ -60,7 +60,7 @@ namespace RealTimePPIngameOverlay
         public float FontSize { get; set; } = 10.0f;
 
         [JsonConverter(typeof(VisibleStatusJsonConverter))]
-        public List<string> VisibleStatus { get; set; } = new List<string>() {"Playing"};
+        public List<string> VisibleStatus { get; set; } = new List<string>() {"Playing", "Rank"};
 
         [JsonIgnore]
         public bool Visibility { get; set; } = true;
