@@ -2,6 +2,8 @@
 using Sync.Tools.ConfigurationAttribute;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,8 +28,35 @@ namespace RealTimePPIngameOverlay
         [OverlayGui]
         public ConfigurationElement OverlayConfigJson
         {
-            get => JsonConvert.SerializeObject(Setting.OverlayConfigs);
-            set => Setting.OverlayConfigs = JsonConvert.DeserializeObject<OverlayConfigs>(value);
+            get
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (var gzip = new GZipStream(ms, CompressionLevel.Optimal,true))
+                    {
+                        byte[] bytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Setting.OverlayConfigs));
+                        gzip.Write(bytes,0,bytes.Length);
+                    }
+                    return Convert.ToBase64String(ms.ToArray());
+                }
+            }
+
+            set
+            {
+                try
+                {
+                    using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(value)))
+                    using (var gzip = new GZipStream(ms, CompressionMode.Decompress))
+                    using (var sr = new StreamReader(gzip))
+                    {
+                        Setting.OverlayConfigs = JsonConvert.DeserializeObject<OverlayConfigs>(sr.ReadToEnd());
+                    }
+                }
+                catch (Exception)
+                {
+                    Setting.OverlayConfigs = JsonConvert.DeserializeObject<OverlayConfigs>(value);
+                }
+            }
         }
 
         [Path(IsDirectory = false)]

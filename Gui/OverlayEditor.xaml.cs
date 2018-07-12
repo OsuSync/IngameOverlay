@@ -30,7 +30,7 @@ namespace RealTimePPIngameOverlay.Gui
     /// </summary>
     partial class OverlayEditor : Window
     {
-        public static List<string> AvailableStatus { get; } = new List<string>() { "Playing", "Listening", "Editing", "Rank", "Idle" };
+        public static IEnumerable<string> AvailableStatus { get; } = typeof(VisibleStatus).GetEnumNames();
         class ConfigItemProxy : INotifyPropertyChanged
         {
             private OverlayConfigItem _object;

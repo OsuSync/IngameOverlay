@@ -63,7 +63,7 @@ namespace RealTimePPIngameOverlay
             }
             else
             {
-                Sync.Tools.IO.DefaultIO.WriteColor("Path error, please check the path!", ConsoleColor.Yellow);
+                Sync.Tools.IO.DefaultIO.WriteColor("Osu! Path error, please check the path!", ConsoleColor.Yellow);
             }
         }
 

@@ -57,7 +57,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enum.cs" />
     <Compile Include="JsonConverter\RgbaStringJsonConverter.cs" />
+    <Compile Include="JsonConverter\VisibleStatusJsonConverter.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="Gui\OverlayConfigurationItemCreator.cs" />
     <Compile Include="Gui\OverlayEditor.xaml.cs">

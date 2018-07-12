@@ -40,7 +40,9 @@ namespace RealTimePPIngameOverlay
     public class OverlayConfigItem:IOverlayConfig
     {
         public string Mmf { get; set; } = "rtpp-pp"; //128b
+
         public string FontPath { get; set; } = ""; //512b
+
         public int[] Position { get; set; } = new[] {0, 0}; //x,y 2i
 
         [JsonConverter(typeof(RgbaStringJsonConverter))]
@@ -51,9 +53,13 @@ namespace RealTimePPIngameOverlay
 
         [JsonConverter(typeof(RgbaStringJsonConverter))]
         public float[] BorderRgba { get; set; } = new[] {0.43f,0.43f,0.5f,0.5f }; //4f
+
         public float[] Pivot { get; set; } = new[] {0f,0f}; //2f
+
+
         public float FontSize { get; set; } = 10.0f;
 
+        [JsonConverter(typeof(VisibleStatusJsonConverter))]
         public List<string> VisibleStatus { get; set; } = new List<string>() {"Playing"};
 
         [JsonIgnore]
