@@ -1,5 +1,4 @@
-﻿using RealTimePPDisplayer.Displayer;
-using Sync.Tools;
+﻿using Sync.Tools;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RealTimePPIngameOverlay
+namespace IngameOverlay
 {
     class OverlayLoader
     {
@@ -24,20 +23,6 @@ namespace RealTimePPIngameOverlay
             IO.CurrentIO.WriteColor(" !!====!! ====================================", ConsoleColor.Yellow);
             IO.CurrentIO.WriteColor(" !!    !! To Accept, Execute command 'overlay i' or 'o i' and start osu!", ConsoleColor.Yellow);
 
-        }
-
-        public static void CreateMapping()
-        {
-
-            if (Injector.CreateMapping())
-            {
-                IO.CurrentIO.WriteColor("Create Data Mapping done!", ConsoleColor.Green);
-                Injector.data.info = "[RealTimePP In Game Overlay] [Loaded]";
-                Injector.data.info2 = "[RealTimePP In Game Overlay] [Loaded2]";
-                Timer hide = new Timer(p => { Injector.data.info = ""; Injector.data.info2 = ""; Injector.WriteData(); }, null, 2000, Timeout.Infinite);
-
-                Injector.WriteData();
-            }
         }
 
         public static void RunLoader()
@@ -65,12 +50,10 @@ namespace RealTimePPIngameOverlay
             });
 
             IO.CurrentIO.WriteColor(" !! Done !! Start osu! now", ConsoleColor.Green);
-            
         }
 
         public OverlayLoader()
         {
-            CreateMapping();
             initial2();
         }
     }
