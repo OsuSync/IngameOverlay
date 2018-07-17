@@ -216,8 +216,10 @@ namespace IngameOverlay.Gui
                     RegistryKey rk = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows NT\CurrentVersion\Fonts\");
                     foreach (var key in rk.GetValueNames())
                     {
-                        _fontNameToFontPathDict.Add(key.Replace(" (TrueType)", ""), System.IO.Path.Combine(fontsdir, rk.GetValue(key).ToString()));
-                        _fontPathToFontNameDict.Add(System.IO.Path.Combine(fontsdir, rk.GetValue(key).ToString()), key.Replace(" (TrueType)", ""));
+                        string k = key.Replace(" (TrueType)", "");
+                        string v = System.IO.Path.Combine(fontsdir, rk.GetValue(key).ToString()).ToLower();
+                        _fontNameToFontPathDict.Add(k, v);
+                        _fontPathToFontNameDict.Add(v, k);
                     }
                 }
 
@@ -230,8 +232,17 @@ namespace IngameOverlay.Gui
                     ConfigItemProxy item = parameter as ConfigItemProxy;
 
                     var fontWindow = new System.Windows.Forms.FontDialog();
-                    if(!string.IsNullOrWhiteSpace(item.FontPath))
-                        fontWindow.Font=new Font(new FontFamily(_fontPathToFontNameDict[item.FontPath]),item.FontSize);
+                    if (!string.IsNullOrWhiteSpace(item.FontPath))
+                    {
+                        try
+                        {
+                            fontWindow.Font = new Font(new FontFamily(_fontPathToFontNameDict[item.FontPath.ToLower()]), item.FontSize);
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show("Not found font from font path!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+                    }
 
                     if (fontWindow.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
