@@ -10,7 +10,7 @@ namespace IngameOverlay
 {
     public class Language : I18nProvider
     {
-        public static GuiLanguageElement GlyphRanges = "Glyph range";
+        public static GuiLanguageElement GlyphRanges = "Glyph ranges";
         public static GuiLanguageElement OverlayConfigJson = "Overlay config";
         public static GuiLanguageElement OsuExecPath = "Osu! game path";
     }
