@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RealTimePPIngameOverlay
+namespace IngameOverlay
 {
     using LPVOID = IntPtr;
     using HANDLE = IntPtr;

@@ -6,10 +6,10 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using IngameOverlay.JsonConverter;
 using Newtonsoft.Json;
-using RealTimePPIngameOverlay.JsonConverter;
 
-namespace RealTimePPIngameOverlay
+namespace IngameOverlay
 {
     interface IOverlayConfig
     {
@@ -58,6 +58,7 @@ namespace RealTimePPIngameOverlay
 
 
         public float FontSize { get; set; } = 10.0f;
+        public float FontScale { get; set; } = 1.0f;
 
         [JsonConverter(typeof(VisibleStatusJsonConverter))]
         public List<string> VisibleStatus { get; set; } = new List<string>() {"Playing", "Rank"};
@@ -87,7 +88,8 @@ namespace RealTimePPIngameOverlay
             WriteFloatArray(BorderRgba, bw);
             WriteFloatArray(Pivot, bw);
 
-            bw.Write(FontSize);
+            bw.Write((int)FontSize);
+            bw.Write(FontScale);
             bw.Write(Visibility);
         }
 

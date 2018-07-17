@@ -7,10 +7,10 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IngameOverlay.Gui;
 using Newtonsoft.Json;
-using RealTimePPIngameOverlay.Gui;
 
-namespace RealTimePPIngameOverlay
+namespace IngameOverlay
 {
     class OverlayConfig : IConfigurable
     {

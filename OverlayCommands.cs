@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace RealTimePPIngameOverlay
+namespace IngameOverlay
 {
     class OverlayCommands
     {

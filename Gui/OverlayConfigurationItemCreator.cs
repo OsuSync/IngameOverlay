@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using ConfigGUI.ConfigurationRegion.ConfigurationItemCreators;
 using Sync.Tools.ConfigurationAttribute;
 
-namespace RealTimePPIngameOverlay.Gui
+namespace IngameOverlay.Gui
 {
     class OverlayConfigurationItemCreator : BaseConfigurationItemCreator
     {

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace RealTimePPIngameOverlay.JsonConverter
+namespace IngameOverlay.JsonConverter
 {
     class VisibleStatusJsonConverter : Newtonsoft.Json.JsonConverter
     {

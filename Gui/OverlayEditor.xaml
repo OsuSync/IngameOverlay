@@ -1,9 +1,9 @@
-﻿<Window x:Class="RealTimePPIngameOverlay.Gui.OverlayEditor"
+﻿<Window x:Class="IngameOverlay.Gui.OverlayEditor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:RealTimePPIngameOverlay.Gui"
+             xmlns:local="clr-namespace:IngameOverlay.Gui"
              xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
@@ -31,9 +31,12 @@
 
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
                         <Label Width="80" HorizontalAlignment="Right" Content="Font File:"/>
-                        <TextBox Width="400" Text="{Binding FontPath}" Margin="0,2" MaxLines="1" AcceptsReturn="False"/>
-                        <Label Width="70" HorizontalAlignment="Right" Content="Font Size:"/>
+                        <TextBox Width="220" Text="{Binding FontPath}" Margin="0,2" MaxLines="1" AcceptsReturn="False"/>
+                        <Label Width="40" HorizontalAlignment="Right" Content="Size:"/>
                         <TextBox Width="40" Text="{Binding FontSize}" Margin="0,2" MaxLines="1" AcceptsReturn="False" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerIntput" DataObject.Pasting="TextBoxIntegerPasting"/>
+                        <Label Width="45" HorizontalAlignment="Right" Content="Scale:"/>
+                        <Slider Name="FontScaleSlider" Width="180" Minimum="0" Maximum="10" Value="{Binding FontScale}" TickFrequency="0.001" Margin="0,0,2,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBox Margin="0,0,2,0" Width="45" MaxLines="1" AcceptsReturn="False" Text="{Binding ElementName=FontScaleSlider,Path=Value,StringFormat='F2'}" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="FloatInput" DataObject.Pasting="TextBoxFloatPasting"/>
                         <Button Width="80" Content="Select Font" Margin="2" Height="21" Command="{Binding SelectFont}" CommandParameter="{Binding}"/>
                     </StackPanel>
 

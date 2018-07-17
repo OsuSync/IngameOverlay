@@ -23,7 +23,7 @@ using Microsoft.Win32;
 using Color = System.Windows.Media.Color;
 using MessageBox = System.Windows.MessageBox;
 
-namespace RealTimePPIngameOverlay.Gui
+namespace IngameOverlay.Gui
 {
     /// <summary>
     /// OverlayEditor.xaml 的交互逻辑
@@ -113,6 +113,17 @@ namespace RealTimePPIngameOverlay.Gui
                 {
                     _object.FontSize = value;
                     OnPropertyChanged(nameof(FontSize));
+                }
+            }
+
+
+            public float FontScale
+            {
+                get => _object.FontScale;
+                set
+                {
+                    _object.FontScale = value;
+                    OnPropertyChanged(nameof(FontScale));
                 }
             }
 
@@ -234,7 +245,7 @@ namespace RealTimePPIngameOverlay.Gui
                             return;
                         }
 
-                        item.FontSize = fontWindow.Font.Size;
+                        item.FontSize = (int)Math.Round(fontWindow.Font.Size,MidpointRounding.AwayFromZero);
                     }
                 }
 

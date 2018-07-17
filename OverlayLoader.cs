@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RealTimePPIngameOverlay
+namespace IngameOverlay
 {
     class OverlayLoader
     {

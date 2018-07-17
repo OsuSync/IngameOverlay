@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Sync.Tools.ConfigurationAttribute;
 
-namespace RealTimePPIngameOverlay.Gui
+namespace IngameOverlay.Gui
 {
     class OverlayGuiAttribute:BaseConfigurationAttribute
     {

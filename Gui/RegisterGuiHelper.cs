@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ConfigGUI;
 using Sync.Plugins;
 
-namespace RealTimePPIngameOverlay.Gui
+namespace IngameOverlay.Gui
 {
     static class RegisterGuiHelper
     {
