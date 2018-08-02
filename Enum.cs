@@ -13,6 +13,7 @@ namespace IngameOverlay
         Listening = 1u << 1,
         Rank = 1u<<2,
         Editing = 1u<<3,
-        Idle = 1u<<4
+        Idle = 1u<<4,
+        MatchSetup = 1u<<5
     }
 }
