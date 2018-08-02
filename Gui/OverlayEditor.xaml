@@ -91,8 +91,8 @@
                             </StackPanel>
                         </GroupBox>
 
-                         <GroupBox Header="When is it visible?" Width="120">
-                             <xctk:CheckListBox Margin="2" ItemsSource="{x:Static local:OverlayEditor.AvailableStatus}" SelectedItemsOverride="{Binding VisibleStatus}"/>
+                         <GroupBox Header="When is it visible?" Width="135">
+                             <xctk:CheckListBox Margin="2" Height="80" Width="115" ItemsSource="{x:Static local:OverlayEditor.AvailableStatus}" SelectedItemsOverride="{Binding VisibleStatus}"/>
                          </GroupBox>
                     </StackPanel>
                 </Grid>
