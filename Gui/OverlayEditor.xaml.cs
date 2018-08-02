@@ -218,8 +218,14 @@ namespace IngameOverlay.Gui
                     {
                         string k = key.Replace(" (TrueType)", "");
                         string v = System.IO.Path.Combine(fontsdir, rk.GetValue(key).ToString()).ToLower();
-                        _fontNameToFontPathDict.Add(k, v);
-                        _fontPathToFontNameDict.Add(v, k);
+                        try
+                        {
+                            _fontNameToFontPathDict.Add(k, v);
+                            _fontPathToFontNameDict.Add(v, k);
+                        }
+                        catch (ArgumentException)
+                        {
+                        }
                     }
                 }
 
