@@ -15,10 +15,10 @@ using OsuRTDataProvider;
 namespace IngameOverlay
 {
     [SyncPluginID("0d48f4c6-d7d8-47cc-8bd3-15dd23449765", PLUGIN_VERSION)]
-    [SyncPluginDependency("7216787b-507b-4eef-96fb-e993722acf2e", Version = "^1.4.0", Require = true)]
+    [SyncPluginDependency("7216787b-507b-4eef-96fb-e993722acf2e", Version = "^1.4.3", Require = true)]
     public class IngameOverlayPlugin : Plugin
     {
-        public const string PLUGIN_VERSION = "0.2.1";
+        public const string PLUGIN_VERSION = "0.2.2";
 
         public IngameOverlayPlugin() : base("IngameOverlay", "Deliay & KedamaOvO")
         {
