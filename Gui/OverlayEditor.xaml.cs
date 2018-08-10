@@ -244,7 +244,7 @@ namespace IngameOverlay.Gui
                         {
                             fontWindow.Font = new Font(new FontFamily(_fontPathToFontNameDict[item.FontPath.ToLower()]), item.FontSize);
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             MessageBox.Show("Not found font from font path!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }

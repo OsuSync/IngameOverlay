@@ -15,7 +15,7 @@ namespace IngameOverlay
 {
     class OverlayCommands
     {
-        Func<string, CommandDelegate, string, bool> cmdRegister;
+        private readonly Func<string, CommandDelegate, string, bool> cmdRegister;
 
         public OverlayCommands(CommandManager manager)
         {
