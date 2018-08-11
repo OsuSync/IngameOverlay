@@ -26,7 +26,10 @@ namespace IngameOverlay.Gui
             btn.Click += (s, e) =>
             {
                 editor = editor ?? new OverlayEditor();
-                editor.ShowDialog();
+                if (editor.Visibility == Visibility.Visible)
+                    editor.Activate();
+                else
+                    editor.Show();
             };
 
             panel.Children.Add(btn);
