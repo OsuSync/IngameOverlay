@@ -18,7 +18,7 @@ namespace IngameOverlay
     [SyncPluginDependency("7216787b-507b-4eef-96fb-e993722acf2e", Version = "^1.4.3", Require = true)]
     public class IngameOverlayPlugin : Plugin
     {
-        public const string PLUGIN_VERSION = "0.2.2";
+        public const string PLUGIN_VERSION = "0.2.3";
 
         public IngameOverlayPlugin() : base("IngameOverlay", "Deliay & KedamaOvO")
         {
