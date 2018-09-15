@@ -14,14 +14,20 @@ namespace IngameOverlay
     {
         static void initial2()
         {
-
-            IO.CurrentIO.WriteColor(" !!EULA!! Accept this Eula to resume!", ConsoleColor.Yellow);
-            IO.CurrentIO.WriteColor(" !!  1.!! This plugins will inject and modify osu! render", ConsoleColor.Yellow);
-            IO.CurrentIO.WriteColor(" !!  2.!! Inject behavior like Steam's overlay", ConsoleColor.Yellow);
-            IO.CurrentIO.WriteColor(" !!  3.!! In a particular environment, will cause banned ", ConsoleColor.Yellow);
-            IO.CurrentIO.WriteColor(" !!  4.!! The author not take the consequences", ConsoleColor.Yellow);
-            IO.CurrentIO.WriteColor(" !!====!! ====================================", ConsoleColor.Yellow);
-            IO.CurrentIO.WriteColor(" !!    !! To Accept, Execute command 'overlay i' or 'o i' and start osu!", ConsoleColor.Yellow);
+            if (!Setting.AcceptEula)
+            {
+                IO.CurrentIO.WriteColor(" !!EULA!! Accept this Eula to resume!", ConsoleColor.Yellow);
+                IO.CurrentIO.WriteColor(" !!  1.!! This plugins will inject and modify osu! render", ConsoleColor.Yellow);
+                IO.CurrentIO.WriteColor(" !!  2.!! Inject behavior like Steam's overlay", ConsoleColor.Yellow);
+                IO.CurrentIO.WriteColor(" !!  3.!! In a particular environment, will cause banned ", ConsoleColor.Yellow);
+                IO.CurrentIO.WriteColor(" !!  4.!! The author not take the consequences", ConsoleColor.Yellow);
+                IO.CurrentIO.WriteColor(" !!====!! ====================================", ConsoleColor.Yellow);
+                IO.CurrentIO.WriteColor(" !!    !! To Accept, Execute command 'overlay i' or 'o i' and start osu!", ConsoleColor.Yellow);
+            }
+            else
+            {
+                IO.CurrentIO.WriteColor("[Overlay] Now you can type 'overlay osu' or 'o osu' to open 'osu! with overlay' .", ConsoleColor.Yellow);
+            }
 
         }
 
