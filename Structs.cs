@@ -60,8 +60,24 @@ namespace IngameOverlay
         public float FontSize { get; set; } = 10.0f;
         public float FontScale { get; set; } = 1.0f;
 
+        private IList<string> _visibleStatus = new List<string>() {"Playing", "Rank"};
+
+        public delegate void VisibilityChangedEvt(IList<string> list);
+
+        public event VisibilityChangedEvt VisibilityChanged;
+
+        public bool BreakTime { get; set; } = false;
+
         [JsonConverter(typeof(VisibleStatusJsonConverter))]
-        public List<string> VisibleStatus { get; set; } = new List<string>() {"Playing", "Rank"};
+        public IList<string> VisibleStatus
+        {
+            get => _visibleStatus;
+            set
+            {
+                _visibleStatus = value;
+                VisibilityChanged?.Invoke(_visibleStatus);
+            }
+        }
 
         [JsonIgnore]
         public bool Visibility { get; set; } = true;

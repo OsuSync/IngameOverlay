@@ -31,6 +31,7 @@ namespace IngameOverlay.Gui
     partial class OverlayEditor : Window
     {
         public static IEnumerable<string> AvailableStatus { get; } = typeof(VisibleStatus).GetEnumNames();
+
         class ConfigItemProxy : INotifyPropertyChanged
         {
             private OverlayConfigItem _object;
@@ -147,13 +148,30 @@ namespace IngameOverlay.Gui
             }
             }
 
-            public List<string> VisibleStatus
+            public bool BreakTimeCheckBoxEnable
             {
-                get => _object.VisibleStatus;
+                get => VisibleStatus.Contains("Playing");
+            }
+
+            public bool BreakTime
+            {
+                get => _object.BreakTime;
                 set
                 {
-                    _object.VisibleStatus = value; 
+                    _object.BreakTime = value;
+                    OnPropertyChanged(nameof(BreakTime));
+                }
+            }
+
+            public string VisibleStatus
+            {
+                get => string.Join(",",_object.VisibleStatus);
+                set
+                {
+                    List<string> list = value.Split(',').ToList();
+                    _object.VisibleStatus = list;
                     OnPropertyChanged(nameof(VisibleStatus));
+                    OnPropertyChanged(nameof(BreakTimeCheckBoxEnable));
                 }
             }
 

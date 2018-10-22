@@ -19,6 +19,7 @@ namespace IngameOverlay
     public class IngameOverlayPlugin : Plugin
     {
         public const string PLUGIN_VERSION = "0.2.3";
+        private string _currentStatusString = "Idle";
 
         public IngameOverlayPlugin() : base("IngameOverlay", "Deliay & KedamaOvO")
         {
@@ -45,14 +46,26 @@ namespace IngameOverlay
                 var ortdp = getHoster().EnumPluings().FirstOrDefault(p => p.Name == "OsuRTDataProvider") as OsuRTDataProviderPlugin;
                 ortdp.ListenerManager.OnStatusChanged += (l, c) =>
                 {
-                    string currentStatusString = c.ToString();
+                    _currentStatusString = c.ToString();
+
                     foreach (var item in Setting.OverlayConfigs.OverlayConfigItems)
                     {
-                        item.Visibility = item.VisibleStatus.Contains(currentStatusString);
+                        item.Visibility = item.VisibleStatus.Contains(_currentStatusString);
                     }
                     Setting.OverlayConfigs.WriteToMmf(false);
                 };
             });
+
+            foreach (var item in Setting.OverlayConfigs.OverlayConfigItems)
+            {
+                item.VisibilityChanged += (list) =>
+                {
+                    item.Visibility = item.VisibleStatus.Contains(_currentStatusString);
+                    Setting.OverlayConfigs.WriteToMmf(false);
+                };
+            }
         }
+
+        private void UpdateVisibility(List<string> list) { }
     }
 }

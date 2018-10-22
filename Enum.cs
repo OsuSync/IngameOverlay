@@ -15,6 +15,6 @@ namespace IngameOverlay
         Editing = 1u<<3,
         Idle = 1u<<4,
         MatchSetup = 1u<<5,
-        Lobby = 1u<<6
+        Lobby = 1u<<6,
     }
 }

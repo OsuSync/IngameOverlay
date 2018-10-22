@@ -36,7 +36,7 @@ namespace IngameOverlay.JsonConverter
 
         public override bool CanConvert(Type objectType)
         {
-            return typeof(List<string>) == objectType;
+            return typeof(IList<string>) == objectType;
         }
     }
 }
