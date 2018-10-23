@@ -69,6 +69,8 @@ namespace IngameOverlay
 
                     foreach (var item in Setting.OverlayConfigs.OverlayConfigItems)
                     {
+                        if(!item.VisibleStatus.Contains("Playing"))continue;
+
                         if (item.BreakTime == false)
                         {
                             item.Visibility = true;
