@@ -18,7 +18,7 @@ namespace IngameOverlay
     [SyncPluginDependency("7216787b-507b-4eef-96fb-e993722acf2e", Version = "^1.4.3", Require = true)]
     public class IngameOverlayPlugin : Plugin
     {
-        public const string PLUGIN_VERSION = "0.2.3";
+        public const string PLUGIN_VERSION = "0.2.4";
         private string _currentStatusString = "Idle";
         private BreakTimeParser _breakTimeParser;
 
@@ -59,10 +59,14 @@ namespace IngameOverlay
                 };
 
                 ortdp.ListenerManager.OnBeatmapChanged += (b) => _breakTimeParser = new BreakTimeParser(b);
+
+                //break time
                 ortdp.ListenerManager.OnPlayingTimeChanged += (time) =>
                 {
                     if (_breakTimeParser == null) return;
+                    if (!_currentStatusString.StartsWith("Playing")) return;
                     bool updateMmf = false;
+
                     foreach (var item in Setting.OverlayConfigs.OverlayConfigItems)
                     {
                         if (item.BreakTime == false)
