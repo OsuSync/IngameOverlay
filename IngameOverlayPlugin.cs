@@ -20,6 +20,7 @@ namespace IngameOverlay
     {
         public const string PLUGIN_VERSION = "0.2.3";
         private string _currentStatusString = "Idle";
+        private BreakTimeParser _breakTimeParser;
 
         public IngameOverlayPlugin() : base("IngameOverlay", "Deliay & KedamaOvO")
         {
@@ -34,13 +35,15 @@ namespace IngameOverlay
 
             EventBus.BindEvent<PluginEvents.InitCommandEvent>(cmds => new OverlayCommands(cmds.Commands));
 
-            EventBus.BindEvent<PluginEvents.LoadCompleteEvent>(p => {
+            EventBus.BindEvent<PluginEvents.LoadCompleteEvent>(p =>
+            {
                 new OverlayLoader();
             });
-            
-            EventBus.BindEvent<PluginEvents.ProgramReadyEvent>(_ =>{
+
+            EventBus.BindEvent<PluginEvents.ProgramReadyEvent>(_ =>
+            {
                 var guiPlugin = getHoster().EnumPluings().FirstOrDefault(p => p.Name == "ConfigGUI");
-                if(guiPlugin!=null)
+                if (guiPlugin != null)
                     RegisterGuiHelper.RegisterGui(guiPlugin);
 
                 var ortdp = getHoster().EnumPluings().FirstOrDefault(p => p.Name == "OsuRTDataProvider") as OsuRTDataProviderPlugin;
@@ -53,6 +56,40 @@ namespace IngameOverlay
                         item.Visibility = item.VisibleStatus.Contains(_currentStatusString);
                     }
                     Setting.OverlayConfigs.WriteToMmf(false);
+                };
+
+                ortdp.ListenerManager.OnBeatmapChanged += (b) => _breakTimeParser = new BreakTimeParser(b);
+                ortdp.ListenerManager.OnPlayingTimeChanged += (time) =>
+                {
+                    if (_breakTimeParser == null) return;
+                    bool updateMmf = false;
+                    foreach (var item in Setting.OverlayConfigs.OverlayConfigItems)
+                    {
+                        if (item.BreakTime == false)
+                        {
+                            item.Visibility = true;
+                            updateMmf = true;
+                        }
+                        else if (item.BreakTime == true && item.Visibility == false)
+                        {
+                            if (_breakTimeParser.InBraekTime(time))
+                            {
+                                item.Visibility = true;
+                                updateMmf = true;
+                            }
+                        }
+                        else if (item.BreakTime == true && item.Visibility == true)
+                        {
+                            if (!_breakTimeParser.InBraekTime(time))
+                            {
+                                item.Visibility = false;
+                                updateMmf = true;
+                            }
+                        }
+                    }
+
+                    if (updateMmf)
+                        Setting.OverlayConfigs.WriteToMmf(false);
                 };
             });
 

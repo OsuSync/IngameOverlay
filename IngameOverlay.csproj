@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BreakTimeParser.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="JsonConverter\RgbaStringJsonConverter.cs" />
     <Compile Include="JsonConverter\VisibleStatusJsonConverter.cs" />

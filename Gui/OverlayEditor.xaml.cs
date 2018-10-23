@@ -148,10 +148,7 @@ namespace IngameOverlay.Gui
             }
             }
 
-            public bool BreakTimeCheckBoxEnable
-            {
-                get => VisibleStatus.Contains("Playing");
-            }
+            public bool BreakTimeCheckBoxEnable => VisibleStatus.Contains("Playing");
 
             public bool BreakTime
             {

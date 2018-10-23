@@ -94,7 +94,7 @@
                         <GroupBox  Header="When is it visible?" Width="135">
                             <StackPanel>
                                 <xctk:CheckListBox Margin="2" Height="80" Width="115" ItemsSource="{x:Static local:OverlayEditor.AvailableStatus}" SelectedValue="{Binding VisibleStatus,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                                <CheckBox ToolTip="Checked/Unchecked: (Shift + Tab)" Content="Break Time" IsEnabled="{Binding BreakTimeCheckBoxEnable}" IsChecked="{Binding BreakTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                <CheckBox Content="Break Time" IsEnabled="{Binding BreakTimeCheckBoxEnable}" IsChecked="{Binding BreakTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                             </StackPanel>
                             
                         </GroupBox>
