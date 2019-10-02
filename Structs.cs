@@ -26,6 +26,7 @@ namespace IngameOverlay
         public void Write(BinaryWriter bw)
         {
             bw.Write(true);//WasChanged
+            bw.Write(new byte[3] { 0, 0, 0 });//Padding
             int size = Encoding.UTF8.GetBytes(GlyphRanges, 0, GlyphRanges.Length, _glyphRangesBuffer,0);
             _glyphRangesBuffer[size] = 0;
             bw.Write(_glyphRangesBuffer, 0, 64);
@@ -107,6 +108,7 @@ namespace IngameOverlay
             bw.Write((int)FontSize);
             bw.Write(FontScale);
             bw.Write(Visibility);
+            bw.Write(new byte[3] { 0, 0, 0 });//Padding
         }
 
         private void WriteFloatArray(float[] arr, BinaryWriter bw)
@@ -126,6 +128,7 @@ namespace IngameOverlay
         public void Write(BinaryWriter bw)
         {
             bw.Write(_needUpdateFonts);//WasChanged
+            bw.Write(new byte[3] { 0, 0, 0 });//Padding
             bw.Write(OverlayConfigItems.Count);
             foreach (var item in OverlayConfigItems)
                 item.Write(bw);
