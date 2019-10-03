@@ -31,15 +31,13 @@ namespace IngameOverlay
             IO.CurrentIO.WriteHelp("osu", "start osu! with overlay");
         }
 
-        private static bool s_cmdIisRun = false;
-
         public static void i(string value)
         {
-            Task.Run(() => OverlayLoader.RunLoader());
             Setting.GlobalConfig.WriteToMmf();
             Setting.OverlayConfigs.WriteToMmf();
             Setting.AcceptEula = true;
-            s_cmdIisRun = true;
+            IO.CurrentIO.WriteColor("[Overlay]Waiting for osu to start.", ConsoleColor.Green);
+            OverlayLoader.Injcet();
         }
 
         public static void osu(string value)
@@ -49,12 +47,10 @@ namespace IngameOverlay
             {
                 if (Setting.AcceptEula)
                 {
-                    if (!s_cmdIisRun)
-                    OverlayLoader.RunLoader();
                     Setting.GlobalConfig.WriteToMmf();
                     Setting.OverlayConfigs.WriteToMmf();
                     Process.Start(Setting.OsuExecPath);
-                    s_cmdIisRun = false;
+                    OverlayLoader.Injcet();
                 }
                 else
                 {

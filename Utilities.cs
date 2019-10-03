@@ -13,8 +13,10 @@ namespace IngameOverlay
         public static void WriteTo(this IOverlayConfig config, MemoryMappedFile mmf)
         {
             using (var stream = mmf.CreateViewStream())
-            using (var bw = new BinaryWriter(stream))
-                config.Write(bw);
+            {
+                using (var bw = new BinaryWriter(stream))
+                    config.WriteTo(bw);
+            }
         }
     }
 }

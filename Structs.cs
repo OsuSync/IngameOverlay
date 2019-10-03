@@ -13,7 +13,7 @@ namespace IngameOverlay
 {
     interface IOverlayConfig
     {
-        void Write(BinaryWriter bw);
+        void WriteTo(BinaryWriter bw);
     }
 
     public class GlobalConfig:IOverlayConfig
@@ -23,13 +23,16 @@ namespace IngameOverlay
 
         private readonly byte[] _glyphRangesBuffer = new byte[128];
 
-        public void Write(BinaryWriter bw)
+        public void WriteTo(BinaryWriter bw)
         {
-            bw.Write(true);//WasChanged
+            bw.Write(false);//WasChanged(Placeholder)
             bw.Write(new byte[3] { 0, 0, 0 });//Padding
             int size = Encoding.UTF8.GetBytes(GlyphRanges, 0, GlyphRanges.Length, _glyphRangesBuffer,0);
             _glyphRangesBuffer[size] = 0;
             bw.Write(_glyphRangesBuffer, 0, 64);
+
+            bw.Seek(0,SeekOrigin.Begin);
+            bw.Write(true);//WasChanged
         }
 
         public void WriteToMmf()
@@ -85,7 +88,7 @@ namespace IngameOverlay
 
         private readonly byte[] _stringBuffer = new byte[512];
 
-        public void Write(BinaryWriter bw)
+        public void WriteTo(BinaryWriter bw)
         {
             int size = 0;
 
@@ -125,13 +128,16 @@ namespace IngameOverlay
 
         private bool _needUpdateFonts = true;
 
-        public void Write(BinaryWriter bw)
+        public void WriteTo(BinaryWriter bw)
         {
-            bw.Write(_needUpdateFonts);//WasChanged
+            bw.Write(false);//WasChanged(Placeholder)
             bw.Write(new byte[3] { 0, 0, 0 });//Padding
             bw.Write(OverlayConfigItems.Count);
             foreach (var item in OverlayConfigItems)
-                item.Write(bw);
+                item.WriteTo(bw);
+
+            bw.Seek(0, SeekOrigin.Begin);
+            bw.Write(_needUpdateFonts);//WasChanged
         }
 
         public void WriteToMmf(bool updateFonts=true)
