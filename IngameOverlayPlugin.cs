@@ -18,7 +18,7 @@ namespace IngameOverlay
     [SyncPluginDependency("7216787b-507b-4eef-96fb-e993722acf2e", Version = "^1.4.3", Require = true)]
     public class IngameOverlayPlugin : Plugin
     {
-        public const string PLUGIN_VERSION = "0.3.0";
+        public const string PLUGIN_VERSION = "0.3.1";
         private string _currentStatusString = "Idle";
         private BreakTimeParser _breakTimeParser;
 
