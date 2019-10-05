@@ -18,12 +18,27 @@ namespace IngameOverlay
     [SyncPluginDependency("7216787b-507b-4eef-96fb-e993722acf2e", Version = "^1.4.3", Require = true)]
     public class IngameOverlayPlugin : Plugin
     {
-        public const string PLUGIN_VERSION = "0.3.1";
+        public const string PLUGIN_VERSION = "0.3.2";
         private string _currentStatusString = "Idle";
         private BreakTimeParser _breakTimeParser;
 
         public IngameOverlayPlugin() : base("IngameOverlay", "Deliay & KedamaOvO")
         {
+        }
+
+        public override void OnDisable()
+        {
+            var tmp = Setting.OverlayConfigs.OverlayConfigItems.Select(c=>c).ToList();
+
+            Setting.OverlayConfigs.OverlayConfigItems.Clear();
+            Setting.OverlayConfigs.WriteToMmf(true);
+
+            Setting.OverlayConfigs.OverlayConfigItems = tmp;
+        }
+
+        public override void OnExit()
+        {
+            OnDisable();
         }
 
         public override void OnEnable()
@@ -101,12 +116,15 @@ namespace IngameOverlay
 
             foreach (var item in Setting.OverlayConfigs.OverlayConfigItems)
             {
+                item.Visibility = false;
                 item.VisibilityChanged += (list) =>
                 {
                     item.Visibility = item.VisibleStatus.Contains(_currentStatusString);
                     Setting.OverlayConfigs.WriteToMmf(false);
                 };
             }
+
+            Setting.OverlayConfigs.WriteToMmf(true);
         }
 
         private void UpdateVisibility(List<string> list) { }
