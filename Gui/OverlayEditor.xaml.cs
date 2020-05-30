@@ -232,14 +232,15 @@ namespace IngameOverlay.Gui
                     foreach (var key in rk.GetValueNames())
                     {
                         string k = key.Replace(" (TrueType)", "");
-                        string v = System.IO.Path.Combine(fontsdir, rk.GetValue(key).ToString()).ToLower();
                         try
                         {
+                            string v = System.IO.Path.Combine(fontsdir, rk.GetValue(key).ToString()).ToLower();
                             _fontNameToFontPathDict.Add(k, v);
                             _fontPathToFontNameDict.Add(v, k);
                         }
-                        catch (ArgumentException)
+                        catch (Exception e)
                         {
+                            Sync.Tools.IO.DefaultIO.WriteColor($"[Overlay Editor] Can't find font(${k}) path. Exception Message: {e.Message}",ConsoleColor.Yellow);
                         }
                     }
                 }
